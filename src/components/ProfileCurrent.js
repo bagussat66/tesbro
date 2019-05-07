@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 import jwt_decode from 'jwt-decode'
-import { getProfile } from './UserFunctions'
+import { getProfile } from './ProfileFunctions'
 
 class ProfileView extends Component {
   constructor() {
@@ -28,8 +28,8 @@ class ProfileView extends Component {
   }
 
   onChange(e) {
-    
-    this.setState({ [e.target.name]: e.target.value })
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    this.setState({ [e.target.name]: value })
   }
   onSubmit(e) {
     e.preventDefault()
@@ -65,6 +65,7 @@ class ProfileView extends Component {
                 <div className="row">
                   <div className="col-md-8">
                     <div className="form-group">
+                      <h2>Informasi Kontak</h2>
                       <label>Foto Profil </label>
                       <img 
                         src="https://via.placeholder.com/150" 
@@ -90,7 +91,15 @@ class ProfileView extends Component {
                         <p>{this.state.name}</p>
                       </div>
                     )}
-                    
+                    <p className="text-right">
+                      Edit? 
+                      <input
+                        name="isEditName"
+                        type="checkbox"
+                        checked={this.state.isEditName}
+                        onChange={this.onChange} />
+                    </p>
+
                     <hr/>
                     {this.state.isEditEmail ? ( 
                       <div className="form-group">
@@ -110,6 +119,15 @@ class ProfileView extends Component {
                         <p>{this.state.email}</p>
                       </div>
                     )}
+                    
+                    <p className="text-right">
+                      Edit? 
+                      <input
+                        name="isEditEmail"
+                        type="checkbox"
+                        checked={this.state.isEditEmail}
+                        onChange={this.onChange} />
+                    </p>
                     <hr/>
                     {this.state.isEditPhone ? ( 
                       <div className="form-group">
@@ -129,8 +147,17 @@ class ProfileView extends Component {
                         <p>{this.state.phone}</p>
                       </div>
                     )}
+                    <p className="text-right">
+                      Edit? 
+                      <input
+                        name="isEditPhone"
+                        type="checkbox"
+                        checked={this.state.isEditPhone}
+                        onChange={this.onChange} />
+                    </p>
                         
                     <hr/>
+                    <h2>Data Diri (sesuai KTP)</h2>
 
                     {this.state.isEditBio ? ( 
                       <div>
@@ -198,6 +225,21 @@ class ProfileView extends Component {
                         </div>
                       </div>
                     )}
+                    <p className="text-right">
+                      Edit? 
+                      <input
+                        name="isEditBio"
+                        type="checkbox"
+                        checked={this.state.isEditBio}
+                        onChange={this.onChange} />
+                    </p>
+                    <hr/>
+                    <button
+                      type="submit"
+                      className="btn btn-md btn-primary"
+                    >
+                      Simpan
+                    </button>
                     <hr/>
                   </div>
                 </div>

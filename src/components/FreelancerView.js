@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 import jwt_decode from 'jwt-decode'
-import { getProfile } from './UserFunctions'
+import { getProfile } from './ProfileFunctions'
 
 class FreelancerView extends Component {
   constructor() {
@@ -21,9 +21,9 @@ class FreelancerView extends Component {
 
   componentDidMount() {
     
-
     getProfile(this.props.match.params.id).then(res => {
       this.setState({
+        name: res.alias,
         name: res.name,
         city: res.city,
         birth_date: res.birth_date,
@@ -36,6 +36,7 @@ class FreelancerView extends Component {
     const token = localStorage.usertoken
     const decoded = jwt_decode(token)
     this.setState({
+      name: decoded.identity.alias,
       name: decoded.identity.name,
       city: decoded.identity.city,
       birth_date: decoded.identity.birth_date,

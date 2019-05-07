@@ -83,6 +83,37 @@ def getProfile(id):
         result = jsonify({"error":"Invalid User ID"})
     
     return result
+
+@app.route('/users/update', methods=['POST'])
+def updateProfile():
+    cur = mysql.connection.cursor()
+    uid = request.get_json()['id']
+    name = request.get_json()['name']
+    email = request.get_json()['email']
+    phone = request.get_json()['phone']
+    address = request.get_json()['address']
+    city = request.get_json()['city']
+    gender = request.get_json()['gender']
+    birth_date = request.get_json()['birth_date']
 	
+    cur.execute("UPDATE users SET (name, email, phone, address, city, gender, birth_date) VALUES ('" + 
+		str(name) + "', '" + 
+		str(email) + "', '" + 
+		str(phone) + "', '" + 
+        str(address) + "', '" + 
+        str(city) + "', '" + 
+        str(gender) + "', '" + 
+		str(birth_date) + "') WHERE id = '" +
+        str(uid)+ "'")
+    mysql.connection.commit()
+    
+    if cur.rowcount==0:
+        result = jsonify({"name":name})
+    else:
+        result = jsonify({"error":"Invalid User ID"})
+    return result
+	
+
+
 if __name__ == '__main__':
     app.run(debug=True)

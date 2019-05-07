@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import ProfileCurrent from './components/ProfileCurrent'
 import FreelancerView from './components/FreelancerView'
+import JobsNew from './components/JobsNew'
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={ProfileCurrent} />
+            <Route exact path="/jobs/new" component={JobsNew} />
             <Route exact path="/freelancer/:id" component={FreelancerView} />
           </div>
         </div>

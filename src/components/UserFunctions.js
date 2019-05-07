@@ -27,15 +27,3 @@ export const login = user => {
       console.log(err)
     })
 }
-
-export const getProfile = id => {
-  return axios
-    .get('/users/profile/'+id)
-    .then(response => {
-      console.log(response)
-      return response.data
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
